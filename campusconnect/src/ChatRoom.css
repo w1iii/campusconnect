@@ -6,78 +6,89 @@
   height: 100vh;
   width: 100%;
   background: #fff;
+  font-family: 'Inter', sans-serif; /* Added a default modern font */
 }
 
 /* 🧭 Chat header */
 .chat-header {
   text-align: center;
-  margin-bottom: 10px;
   padding: 1rem;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0; /* Prevents header from shrinking */
 }
 
-/* 💬 Scrollable message area */
+/* 💬 Scrollable message area - Fully Responsive */
 .chat-box {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px 15rem;
+  padding: 20px 1.5rem; /* Reduced padding for better all-screen coverage */
   overflow-y: auto;
   border: none;
-  margin-bottom: 60px; /* space for input bar */
+  /* Centering message content and limiting width on large screens */
+  max-width: 900px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  /* Ensure enough space for the fixed input bar and actions */
+  margin-bottom: 90px;
 }
 
 .message.system {
   margin-top: 2rem;
 }
 
-/* ⌨️ Input bar fixed at bottom */
+/* ⌨️ Input bar fixed at bottom - Responsive Flow */
 .chat-input-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Stack form and actions vertically */
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  padding: 10px 1rem; /* Responsive horizontal padding */
   background: #fff;
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .chat-form {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  gap: 0.75rem; /* Slightly reduced gap */
   width: 100%;
-  max-width: 700px;
+  max-width: 700px; /* Content width limit */
+  margin-bottom: 0.5rem; /* Space above action buttons */
 }
 
+/* Input and Button Styling (Refined for Flexbox) */
 input {
-  width: 30rem;
-  height: 2.3rem;
-  border-radius: 6px;
+  flex: 1; /* Key change: Input takes up all available remaining space */
+  height: 2.5rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  padding: 0 10px;
+  padding: 0 12px;
   outline: none;
   font-size: 1rem;
+  min-width: 0; /* Prevents input from overflowing its container */
 }
 
 button {
-  width: 5rem;
-  height: 2.3rem;
-  border-radius: 6px;
+  width: auto;
+  padding: 0 1.25rem; /* Use padding for width instead of fixed width */
+  height: 2.5rem;
+  border-radius: 8px;
   background-color: #4a90e2;
   color: white;
   border: none;
   cursor: pointer;
   font-size: 0.9rem;
   transition: 0.3s;
+  flex-shrink: 0; /* Prevents button from shrinking */
 }
 
 button:hover {
@@ -85,13 +96,16 @@ button:hover {
 }
 
 /* 💭 Message bubbles */
+.message.me,
+.message.partner {
+  padding: 10px 16px;
+  max-width: 65%; /* Adjusted max-width slightly */
+  word-wrap: break-word;
+}
 .message.me {
   align-self: flex-end;
   background: linear-gradient(to right, #fff5f5, #f9e8e8c7, #f3ebe4);
   border-radius: 20px 20px 0 20px;
-  padding: 10px 16px;
-  max-width: 60%;
-  word-wrap: break-word;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.26);
 }
 
@@ -99,9 +113,6 @@ button:hover {
   align-self: flex-start;
   background: linear-gradient(to right, #f9f9f9, #f2f2f2);
   border-radius: 20px 20px 20px 0;
-  padding: 10px 16px;
-  max-width: 60%;
-  word-wrap: break-word;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -109,15 +120,16 @@ button:hover {
 .chat-actions {
   display: flex;
   gap: 10px;
-  margin-top: 5px;
-  margin-bottom: 2rem;
   justify-content: center;
-  align-items: center;
+  width: 100%;
+  max-width: 700px; /* Match form width */
+  margin-bottom: 5px;
 }
 
 .leave-link {
   display: flex;
-  width: 5rem;
+  flex: 1; /* Allows links to share space */
+  max-width: 120px; /* Limit size on large screens */
   height: 2.3rem;
   border-radius: 6px;
   background-color: #f9faef;
@@ -131,6 +143,8 @@ button:hover {
 }
 
 .chat-actions button {
+  flex: 1; /* Allows buttons to share space */
+  max-width: 120px; /* Limit size on large screens */
   font-size: 12px;
   background-color: #f9faef;
   border: none;
@@ -146,62 +160,28 @@ button:hover {
   background-color: #e6e6e6;
 }
 
-/* 📱 Mobile responsiveness */
-@media (max-width: 1024px) {
-  .chat-box {
-    padding: 20px 6rem;
-  }
-
-  input {
-    width: 20rem;
-  }
-}
-
+/* 📱 Mobile responsiveness: Tighter spacing and larger message bubbles */
 @media (max-width: 768px) {
   .chat-box {
-    padding: 20px 3rem;
-  }
-
-  input {
-    width: 16rem;
-  }
-
-  button {
-    width: 4.5rem;
+    padding: 15px 1rem; /* Tighter padding for mobile */
   }
 }
 
 @media (max-width: 480px) {
   .chat-box {
-    padding: 15px 1rem;
+    padding: 15px 0.75rem; /* Very tight on narrowest screens */
   }
 
   .chat-form {
-    flex-direction: row;
-    gap: 0.5rem;
-    padding: 0 10px;
+    gap: 0.75rem;
+    padding: 0 0.5rem;
   }
 
-  input {
-    width: 100%;
-    height: 2.2rem;
-    font-size: 0.9rem;
-  }
-
-  button {
-    width: auto;
-    padding: 8px 14px;
-    height: 2.2rem;
-    font-size: 0.9rem;
-  }
+  /* Input and Send button will now fluidly manage space due to flex: 1 on input */
 
   .message.me,
   .message.partner {
-    max-width: 80%;
+    max-width: 90%; /* Messages take up more width on small screens */
     font-size: 0.9rem;
-  }
-
-  .chat-header h1 {
-    font-size: 1.2rem;
   }
 }
