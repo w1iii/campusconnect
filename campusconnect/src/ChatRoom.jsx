@@ -7,7 +7,7 @@ import "./ChatRoom.css";
 const SOCKET_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:5000" // local dev
-    : "https://your-render-backend.onrender.com"; // 🔁 replace with your Render URL
+    : "https://campusconnect-bcd.netlify.app"; // 🔁 replace with your Render URL
 
 const socket = io(SOCKET_URL, { transports: ["websocket"] });
 
