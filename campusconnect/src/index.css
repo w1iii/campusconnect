@@ -1,78 +1,63 @@
 :root {
-  /* Light mode */
-  --bg-light: linear-gradient(-45deg, #fff5f5, #f9e8e8, #f7e8d9, #ffffff);
-  --bg-dark: linear-gradient(-45deg, #000000, #0d0d0d, #1a1a1a, #111111);
+  /* Light mode colors */
+  --bg-color: linear-gradient(-45deg, #fff5f5, #f9e8e8, #f7e8d9, #ffffff);
   --text-color: #754F4F;
-  --text-dark: #f0f0f0;
+  --input-bg: #f5f5f5;
+  --bubble-me: linear-gradient(to right, #fff5f5, #f9e8e8, #f7e8d9);
+  --bubble-partner: linear-gradient(to right, #f9f9f9, #f2f2f2);
 }
 
+/* Dark mode overrides */
+.dark-mode {
+  --bg-color: linear-gradient(-45deg, #000000, #0d0d0d, #1a1a1a, #111111);
+  --text-color: #f0f0f0;
+  --input-bg: #1e1e1e;
+  --bubble-me: linear-gradient(to right, #2a2a2a, #333333, #444444);
+  --bubble-partner: linear-gradient(to right, #1f1f1f, #2a2a2a);
+}
+
+/* Body base styles */
 body {
-  position: relative;
-  margin: 0;
-  font-family: "Inter", sans-serif;
-  overflow-x: hidden;
-  transition: color 0.6s ease;
+  background: var(--bg-color);
+  background-size: 400% 400%;
   color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  transition:
+    background 1s ease-in-out,
+    color 0.5s ease,
+    filter 0.8s ease;
 }
 
-/* 🎨 Base gradient (light mode) */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-light);
-  background-size: 400% 400%;
+/* Light mode gradient animation */
+body:not(.dark-mode) {
   animation: moveBg 18s ease infinite;
-  z-index: -2;
-  transition: opacity 1.2s ease-in-out;
-  opacity: 1;
 }
 
-/* 🌙 Dark mode overlay gradient */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-dark);
-  background-size: 400% 400%;
-  animation: darkWave 14s ease-in-out infinite;
-  z-index: -1;
-  transition: opacity 1.2s ease-in-out;
-  opacity: 0;
-}
-
-/* ✨ When dark mode is active */
+/* Dark mode subtle glowing movement */
 body.dark-mode {
-  color: var(--text-dark);
+  animation: darkWave 14s ease-in-out infinite;
 }
 
-body.dark-mode::before {
-  opacity: 0; /* fade out light layer */
+/* Smoothly fade the animation when switching modes */
+body,
+body.dark-mode {
+  transition: background 1s ease-in-out, color 0.5s ease, filter 0.8s ease;
 }
 
-body.dark-mode::after {
-  opacity: 1; /* fade in dark layer */
-}
-
-/* Animations for both layers */
+/* Light mode animation (soft pastel motion) */
 @keyframes moveBg {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* Dark mode animation (dim wave-like glow) */
 @keyframes darkWave {
   0% { background-position: 0% 50%; filter: brightness(1); }
   50% { background-position: 100% 50%; filter: brightness(1.15); }
   100% { background-position: 0% 50%; filter: brightness(1); }
 }
-
 
 .main-container button{
     position: absolute;
