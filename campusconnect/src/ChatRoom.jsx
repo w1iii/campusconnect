@@ -4,10 +4,12 @@ import { io } from "socket.io-client";
 import "./ChatRoom.css";
 
 // 🧠 Automatically switch between local and deployed backend
-const SOCKET_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5000" // local dev
-    : "https://campusconnect-bcd.netlify.app"; // 🔁 replace with your Render URL
+// const SOCKET_URL =
+//   import.meta.env.MODE === "development"
+//     ? "https://campusconnectbcd.onrender.com" // local dev
+//     : "https://campusconnectbcd.onrender.com"; // 🔁 replace with your Render URL
+
+const SOCKET_URL = "https://campusconnectbcd.onrender.com"
 
 const socket = io(SOCKET_URL, { transports: ["websocket"] });
 
