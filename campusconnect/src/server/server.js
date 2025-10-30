@@ -15,15 +15,18 @@ app.get("/", (req, res) => {
 const server = createServer(app);
 
 // ✅ Restrict to your frontend URLs
+
 const io = new Server(server, {
   cors: {
     origin: [
-      "http://localhost:5173", // for local testing
-      "https://campusconnectbcd.onrender.com", // your deployed frontend
+      "http://localhost:5173", // local dev
+      "https://campusconnect-bcd.onrender.com", // ✅ your Render backend domain
+      "https://campusconnectbcd.onrender.com",  // ✅ (optional) if frontend is separate
     ],
     methods: ["GET", "POST"],
   },
 });
+
 
 let waitingUsers = [];
 let activePairs = new Map();
