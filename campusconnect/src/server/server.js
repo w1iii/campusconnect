@@ -67,6 +67,7 @@ io.on("connection", (socket) => {
     }
   });
 
+  // 🆕 Handle when user clicks “Next” (Find new partner)
   socket.on("next", () => {
     const partnerId = activePairs.get(socket.id);
     if (partnerId) {
@@ -85,6 +86,22 @@ io.on("connection", (socket) => {
     socket.emit("searching");
   });
 
+  // 🆕 Handle when user clicks “Leave” on the frontend
+  socket.on("leaveChat", () => {
+    console.log("🚪 User left the chat:", socket.id);
+
+    const partnerId = activePairs.get(socket.id);
+    if (partnerId) {
+      io.to(partnerId).emit("partnerLeft");
+      activePairs.delete(partnerId);
+      activePairs.delete(socket.id);
+    }
+
+    // Also remove from waiting queue if they were waiting
+    waitingUsers = waitingUsers.filter((u) => u.id !== socket.id);
+  });
+
+  // Handle disconnection (refresh, close tab, network loss)
   socket.on("disconnect", () => {
     console.log("❌ User disconnected:", socket.id);
 

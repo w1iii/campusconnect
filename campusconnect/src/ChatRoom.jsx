@@ -84,8 +84,9 @@
         socket.off("connect");
         socket.off("disconnect");
         socket.off("reconnect");
-        // ❗️ Do NOT disconnect the socket — just leave the queue
-        socket.emit("leaveQueue");
+        
+        // Let server know this user left
+        socket.emit("leaveChat");
       };
     }, [school, username]);
 
@@ -165,7 +166,16 @@
           <div className="chat-actions">
             {partner && <button onClick={findNext}>Next</button>}
             {partnerLeft && <button onClick={findNext}>🔄 Find New Partner</button>}
-            <Link to="/" className="leave-link">Leave</Link>
+            <Link
+                to="/"
+                className="leave-link"
+                onClick={() => {
+                  socket.emit("leaveChat"); // 👈 notify the server
+                }}
+              >
+                Leave
+              </Link>
+
           </div>
         </div>
       </div>
