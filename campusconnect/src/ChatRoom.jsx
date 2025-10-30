@@ -9,7 +9,11 @@ import "./ChatRoom.css";
 //     ? "https://campusconnectbcd.onrender.com" // local dev
 //     : "https://campusconnectbcd.onrender.com"; // 🔁 replace with your Render URL
 
-const SOCKET_URL = "https://campusconnectbcd.onrender.com"
+const SOCKET_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5000" // local backend
+    : "https://campusconnect-bcd.onrender.com"; // Render backend
+
 
 const socket = io(SOCKET_URL, { transports: ["websocket"] });
 

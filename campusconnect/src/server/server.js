@@ -1,14 +1,26 @@
 // server/server.js
 import express from "express";
-import http from "http";
+import { createServer } from "http";
 import { Server } from "socket.io";
+import cors from "cors";
 
 const app = express();
-const server = http.createServer(app);
+app.use(cors());
 
+// ✅ Optional test route — helps confirm server is live on Render
+app.get("/", (req, res) => {
+  res.send("CampusConnect server is running ✅");
+});
+
+const server = createServer(app);
+
+// ✅ Restrict to your frontend URLs
 const io = new Server(server, {
   cors: {
-    origin: "*", // allow frontend
+    origin: [
+      "http://localhost:5173", // for local testing
+      "https://campusconnectbcd.onrender.com", // your deployed frontend
+    ],
     methods: ["GET", "POST"],
   },
 });
@@ -39,7 +51,7 @@ io.on("connection", (socket) => {
       activePairs.set(socket.id, partner.id);
       activePairs.set(partner.id, socket.id);
 
-      // Notify both
+      // Notify both users
       socket.emit("matched", {
         school: partner.school,
         username: partner.username,
@@ -50,9 +62,11 @@ io.on("connection", (socket) => {
         username,
       });
 
-      console.log(`🎉 Matched ${username} (${socket.id}) with ${partner.username} (${partner.id})`);
+      console.log(
+        `🎉 Matched ${username} (${socket.id}) with ${partner.username} (${partner.id})`
+      );
     } else {
-      // Add to queue (store only simple info)
+      // Add to waiting queue
       waitingUsers.push({
         id: socket.id,
         school,
@@ -96,5 +110,8 @@ io.on("connection", (socket) => {
   });
 });
 
+// ✅ Render uses dynamic port
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+server.listen(PORT, () =>
+  console.log(`🚀 Server running on port ${PORT}`)
+);
