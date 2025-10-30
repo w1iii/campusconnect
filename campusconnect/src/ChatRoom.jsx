@@ -7,7 +7,7 @@ import "./ChatRoom.css";
 // const SOCKET_URL =
 //   import.meta.env.MODE === "development"
 //     ? "https://campusconnectbcd.onrender.com" // local dev
-//     : "https://campusconnectbcd.onrender.com"; // 🔁 replace with your Render URL
+//     : "https://campusconnectbcd.onrender.com"; // 
 
 const SOCKET_URL =
   import.meta.env.MODE === "development"
