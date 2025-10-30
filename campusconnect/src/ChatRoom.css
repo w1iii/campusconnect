@@ -9,6 +9,13 @@
   font-family: 'Inter', sans-serif; /* Recommended a standard font */
 }
 
+.chat-controls{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
 /* 🧭 Chat header */
 .chat-header {
   text-align: center;
