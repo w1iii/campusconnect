@@ -128,11 +128,13 @@ function ChatRoom({ username }) {
     }, 800);
   };
 
+
   if (!mySchool) return <div>Invalid school. <Link to="/">Back</Link></div>;
 
   return (
     <div className={`chat-container ${isTransitioning ? "fade-out" : ""}`}>
       <div className="chat-header">
+        <img src={mySchool.logo}></img>
         <h1>{mySchool.name}</h1>
         {partner ? (
           <div className="partner">

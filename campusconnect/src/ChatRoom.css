@@ -18,12 +18,20 @@
 
 /* 🧭 Chat header */
 .chat-header {
+  display:flex;
+  justify-content:center;
+  align-items:center;
   text-align: center;
   margin-bottom: 10px;
   padding: 1rem;
-  background: #fff;
+  background: #ffffff29;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   flex-shrink: 0;
+  gap:1rem;
+}
+
+.chat-header img{
+  width:80px;
 }
 
 /* 💬 Scrollable message area - Made Fluid */
