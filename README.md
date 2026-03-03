@@ -2,6 +2,11 @@
 
 An anonymous real-time chat application that connects students from different universities in Bacolod City. Students can chat with random peers from other schools, fostering cross-campus communication and new connections.
 
+<img width="1440" height="811" alt="Screenshot 2026-03-03 at 10 05 29 PM" src="https://github.com/user-attachments/assets/87b19146-0318-41ae-a7a0-1bea1d754272" />
+<img width="1438" height="810" alt="Screenshot 2026-03-03 at 10 08 54 PM" src="https://github.com/user-attachments/assets/a5ea7cd0-b386-453e-8962-f3fb731e3be7" />
+<img width="1440" height="810" alt="Screenshot 2026-03-03 at 10 09 03 PM" src="https://github.com/user-attachments/assets/09b15818-3556-4662-af64-4b517e113c6a" />
+
+
 ## Supported Universities
 
 - University of St. La Salle (USLS)
