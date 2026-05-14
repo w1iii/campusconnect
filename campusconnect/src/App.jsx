@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { socket } from "./socket.js";
 import "./App.css";
 
 const universities = {
@@ -14,8 +15,8 @@ const universities = {
 function App() {
   const navigate = useNavigate();
   const [isDark, setIsDark] = useState(false);
+  const [activeCount, setActiveCount] = useState(null);
 
-  // 🔄 Update the body class when dark mode toggles
   useEffect(() => {
     if (isDark) {
       document.body.classList.add("dark-mode");
@@ -23,6 +24,11 @@ function App() {
       document.body.classList.remove("dark-mode");
     }
   }, [isDark]);
+
+  useEffect(() => {
+    socket.on("activeUserCount", (data) => setActiveCount(data.total));
+    return () => socket.off("activeUserCount");
+  }, []);
 
   const handleClick = (key) => {
     navigate(`/chat?school=${key}`);
@@ -39,6 +45,10 @@ function App() {
       >
         {isDark ? "☀️" : "🌙"}
       </button>
+
+      {activeCount !== null && (
+        <div className="online-badge">✨ {activeCount} student{activeCount !== 1 ? "s" : ""} online</div>
+      )}
 
       <div className="logo-container">
         {Object.entries(universities).map(([key, uni]) => (
