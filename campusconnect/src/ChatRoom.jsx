@@ -1,21 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { io } from "socket.io-client";
+import { socket } from "./socket.js";
 import "./ChatRoom.css";
-
-// 🧠 Automatically switch between local and deployed backend
-// const SOCKET_URL =
-//   import.meta.env.MODE === "development"
-//     ? "https://campusconnectbcd.onrender.com" // local dev
-//     : "https://campusconnectbcd.onrender.com"; // 
-
-const SOCKET_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5000" // local backend
-    : "https://campusconnect-bcd.onrender.com"; // Render backend
-
-
-const socket = io(SOCKET_URL, { transports: ["websocket"] });
 
 const universities = {
   usls: { name: "University of St. La Salle", logo: "/usls.png" },
@@ -38,8 +24,14 @@ function ChatRoom({ username }) {
   const [partnerLeft, setPartnerLeft] = useState(false);
   const [isMatching, setIsMatching] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [onlineCount, setOnlineCount] = useState(null);
 
   const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    socket.on("activeUserCount", (data) => setOnlineCount(data.total));
+    return () => socket.off("activeUserCount");
+  }, []);
 
   // Auto-scroll
   useEffect(() => {
@@ -136,6 +128,9 @@ function ChatRoom({ username }) {
       <div className="chat-header">
         <img src={mySchool.logo}></img>
         <h1>{mySchool.name}</h1>
+        {onlineCount !== null && (
+          <div className="online-count">{onlineCount} online</div>
+        )}
         {partner ? (
           <div className="partner">
             Chatting with {partner.username} from {universities[partner.school].name}
