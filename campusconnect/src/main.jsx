@@ -15,22 +15,26 @@ function Root() {
     return (
       <div className="modal-overlay">
         <div className="modal-container">
-          <h2>Enter your username</h2>
-          <input
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Your name..."
-            className="modal-input"
-          />
-          <button
-            className="modal-button"
-            onClick={() => {
+          <h2>Welcome to Campus Connect</h2>
+          <p>Enter a username to start chatting</p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
               if (inputValue.trim()) setUsername(inputValue.trim());
             }}
           >
-            Continue
-          </button>
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="Your name..."
+              className="modal-input"
+              autoFocus
+            />
+            <button type="submit" className="modal-button">
+              Continue
+            </button>
+          </form>
         </div>
       </div>
     );

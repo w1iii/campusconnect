@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-import "./index.css";
 
 const universities = {
   usls: { name: "University of St. La Salle", logo: "/usls.png" },
@@ -33,9 +32,8 @@ function App() {
     <div className="main-container">
       <h1>Campus Connect</h1>
 
-      {/* 🌙 / ☀️ Toggle button */}
       <button
-        id="toggleTheme"
+        className="theme-toggle"
         onClick={() => setIsDark(!isDark)}
         title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
       >
@@ -54,7 +52,7 @@ function App() {
         ))}
       </div>
 
-      <p>Choose your university to start chatting with random students across the city.</p>
+      <p className="subtitle">Choose your university to start chatting with random students across the city.</p>
     </div>
   );
 }

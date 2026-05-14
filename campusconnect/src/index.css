@@ -1,179 +1,173 @@
 :root {
-  /* Light mode colors */
-  --bg-color: linear-gradient(-45deg, #fff5f5, #f9e8e8, #f7e8d9, #ffffff);
-  --text-color: #754F4F;
-  --input-bg: #f5f5f5;
-  --bubble-me: linear-gradient(to right, #fff5f5, #f9e8e8, #f7e8d9);
-  --bubble-partner: linear-gradient(to right, #f9f9f9, #f2f2f2);
+  --bg-gradient: linear-gradient(135deg, #fff0e8 0%, #fce4ec 30%, #f3e5f5 60%, #e3f2fd 100%);
+  --text-primary: #2d1b1b;
+  --text-secondary: #6b4f4f;
+  --surface: rgba(255,255,255,0.7);
+  --surface-solid: #ffffff;
+  --bubble-me: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  --bubble-partner: linear-gradient(135deg, #f5f5f5, #ebebeb);
+  --input-bg: rgba(255,255,255,0.8);
+  --accent: #ff6b6b;
+  --accent-hover: #e05555;
+  --accent-secondary: #7c4dff;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 50%;
 }
 
-/* Dark mode overrides */
 .dark-mode {
-  --bg-color: linear-gradient(-45deg, #000000, #0d0d0d, #1a1a1a, #111111);
-  --text-color: #f0f0f0;
-  --input-bg: #1e1e1e;
-  --bubble-me: linear-gradient(to right, #2a2a2a, #333333, #444444);
-  --bubble-partner: linear-gradient(to right, #1f1f1f, #2a2a2a);
+  --bg-gradient: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 30%, #16213e 60%, #0d0d1a 100%);
+  --text-primary: #e8e0e0;
+  --text-secondary: #a89090;
+  --surface: rgba(255,255,255,0.05);
+  --surface-solid: #1e1e2e;
+  --bubble-me: linear-gradient(135deg, #7c4dff, #9c6dff);
+  --bubble-partner: linear-gradient(135deg, #2a2a3e, #35354a);
+  --input-bg: rgba(255,255,255,0.08);
+  --accent: #b388ff;
+  --accent-hover: #d0b0ff;
+  --accent-secondary: #ff8a8a;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.15);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.3);
 }
 
-/* Body base styles */
 body {
-  background: var(--bg-color);
-  background-size: 400% 400%;
-  color: var(--text-color);
-  font-family: 'Inter', sans-serif;
   margin: 0;
-  transition:
-    background 1s ease-in-out,
-    color 0.5s ease,
-    filter 0.8s ease;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  color: var(--text-primary);
+  transition: background 1s ease-in-out, color 0.3s ease;
 }
 
-/* Light mode gradient animation */
 body:not(.dark-mode) {
   animation: moveBg 18s ease infinite;
 }
 
-/* Dark mode subtle glowing movement */
 body.dark-mode {
   animation: darkWave 14s ease-in-out infinite;
 }
 
-/* Smoothly fade the animation when switching modes */
-body,
-body.dark-mode {
-  transition: background 1s ease-in-out, color 0.5s ease, filter 0.8s ease;
-}
-
-/* Light mode animation (soft pastel motion) */
 @keyframes moveBg {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Dark mode animation (dim wave-like glow) */
 @keyframes darkWave {
   0% { background-position: 0% 50%; filter: brightness(1); }
   50% { background-position: 100% 50%; filter: brightness(1.15); }
   100% { background-position: 0% 50%; filter: brightness(1); }
 }
 
-.main-container button{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--text-color);
-    background-color: rgb(255, 255, 255);
-}
-
-
-.main-container button:hover{
-    transition: 0.5s;
-    background-color: black;
-}
-
-
-.logo-container img {
-  width: 150px;
-  transition: transform 0.3s ease-in-out; /* smooth in and out */
-  cursor: pointer;
-}
-
-.logo-container img:hover {
-  transform: scale(1.1); /* enlarge slightly */
-  filter: brightness(1.1); /* optional: adds a soft glow effect */
-}
-
-.leave-link{
-    display: flex;
-    width: 5rem;
-    height: 2.3rem;
-    border-radius: 6px;
-    background-color: #f9faef;
-    color: black;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    align-items: center;
-    justify-content: center;
-    font-weight: 300;
-}
-
-/* Modal overlay (dark background) */
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
 }
 
-/* Modal container (white box) */
 .modal-container {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background: var(--surface-solid);
+  padding: clamp(24px, 4vw, 40px);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
   text-align: center;
-  width: 300px;
-  animation: fadeIn 0.3s ease-in-out;
+  width: min(360px, 90vw);
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-container h2 {
-  margin-bottom: 15px;
-  color: #222;
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
-/* Input box */
+.modal-container p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+}
+
 .modal-input {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-bottom: 15px;
+  padding: 12px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  margin-bottom: 16px;
   outline: none;
-  transition: border-color 0.2s;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal-input:focus {
-  border-color: #4a90e2;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
 }
 
-/* Button */
+.dark-mode .modal-input:focus {
+  box-shadow: 0 0 0 3px rgba(179, 136, 255, 0.2);
+}
+
 .modal-button {
-  background: #4a90e2;
+  background: var(--accent);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  width: 100%;
+  transition: all 0.2s ease;
 }
 
 .modal-button:hover {
-  background: #357abd;
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Subtle animation */
+.modal-button:active {
+  transform: translateY(0);
+}
+
+/* Shared animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
