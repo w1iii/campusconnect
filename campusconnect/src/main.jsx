@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // main.jsx
 import React, { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";

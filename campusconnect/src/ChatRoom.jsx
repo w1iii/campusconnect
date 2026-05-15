@@ -91,7 +91,7 @@ function ChatRoom({ username }) {
       socket.off("disconnect");
       socket.off("reconnect");
     };
-  }, [school, username]);
+  }, [school, username, mySchool]);
 
   const sendMessage = (e) => {
     e.preventDefault();
