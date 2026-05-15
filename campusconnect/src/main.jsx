@@ -8,8 +8,13 @@ import ChatRoom from "./ChatRoom.jsx";
 
 
 function Root() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(() => localStorage.getItem("cc_username") || "");
   const [inputValue, setInputValue] = useState("");
+
+  const handleSetUsername = (name) => {
+    localStorage.setItem("cc_username", name);
+    setUsername(name);
+  };
 
   if (!username) {
     return (
@@ -20,7 +25,7 @@ function Root() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              if (inputValue.trim()) setUsername(inputValue.trim());
+              if (inputValue.trim()) handleSetUsername(inputValue.trim());
             }}
           >
             <input

@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, Navigate } from "react-router-dom";
 import { socket } from "./socket.js";
 import "./ChatRoom.css";
 
@@ -121,7 +121,7 @@ function ChatRoom({ username }) {
   };
 
 
-  if (!mySchool) return <div>Invalid school. <Link to="/">Back</Link></div>;
+  if (!mySchool) return <Navigate to="/" replace />;
 
   return (
     <div className={`chat-container ${isTransitioning ? "fade-out" : ""}`}>
