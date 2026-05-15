@@ -33,22 +33,6 @@ h1 {
   margin: 0;
 }
 
-/* Online count badge */
-.online-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 18px;
-  border-radius: 999px;
-  background: var(--surface);
-  backdrop-filter: blur(12px);
-  color: var(--text-primary);
-  font-size: 0.85rem;
-  font-weight: 500;
-  box-shadow: var(--shadow-sm);
-  animation: fadeInUp 0.5s ease backwards;
-}
-
 /* Dark mode toggle */
 .theme-toggle {
   position: fixed;

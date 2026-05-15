@@ -24,14 +24,8 @@ function ChatRoom({ username }) {
   const [partnerLeft, setPartnerLeft] = useState(false);
   const [isMatching, setIsMatching] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [onlineCount, setOnlineCount] = useState(null);
 
   const chatEndRef = useRef(null);
-
-  useEffect(() => {
-    socket.on("activeUserCount", (data) => setOnlineCount(data.total));
-    return () => socket.off("activeUserCount");
-  }, []);
 
   // Auto-scroll
   useEffect(() => {
@@ -128,9 +122,6 @@ function ChatRoom({ username }) {
       <div className="chat-header">
         <img src={mySchool.logo}></img>
         <h1>{mySchool.name}</h1>
-        {onlineCount !== null && (
-          <div className="online-count">{onlineCount} online</div>
-        )}
         {partner ? (
           <div className="partner">
             Chatting with {partner.username} from {universities[partner.school].name}

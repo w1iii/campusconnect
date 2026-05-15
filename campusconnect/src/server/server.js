@@ -31,13 +31,6 @@ const io = new Server(server, {
 let waitingUsers = [];
 let activePairs = new Map();
 
-const broadcastActiveCount = () => {
-  const waiting = waitingUsers.length;
-  const paired = activePairs.size;
-  const total = waiting + paired;
-  io.emit("activeUserCount", { waiting, paired, total });
-};
-
 io.on("connection", (socket) => {
   console.log("✅ Connected:", socket.id);
 
@@ -84,8 +77,6 @@ io.on("connection", (socket) => {
       });
       console.log(`🕒 ${username} added to waiting list (${school})`);
     }
-
-    broadcastActiveCount();
   });
 
   socket.on("sendMessage", ({ text, username }) => {
@@ -106,7 +97,6 @@ io.on("connection", (socket) => {
     }
 
     waitingUsers = waitingUsers.filter((u) => u.id !== socket.id);
-    broadcastActiveCount();
   });
 
   socket.on("disconnect", () => {
@@ -120,7 +110,6 @@ io.on("connection", (socket) => {
     }
 
     waitingUsers = waitingUsers.filter((u) => u.id !== socket.id);
-    broadcastActiveCount();
   });
 });
 
